@@ -5,35 +5,35 @@
 
 void Learner::respond(const std::string phrase){
     std::fstream memory;
-    memory.open("memory.txt", std::ios::in);      // открыть файл памяти
-    if (memory.fail()) {                          // создать файл если его не существует
+    memory.open("memory.txt", std::ios::in);      // РѕС‚РєСЂС‹С‚СЊ С„Р°Р№Р» РїР°РјСЏС‚Рё
+    if (memory.fail()) {                          // СЃРѕР·РґР°С‚СЊ С„Р°Р№Р» РµСЃР»Рё РµРіРѕ РЅРµ СЃСѓС‰РµСЃС‚РІСѓРµС‚
         memory.open("memory.txt", std::ios::out);
         memory.close();
     }
     
-    while( !memory.eof() ) {          // Поиск до конца файла
+    while( !memory.eof() ) {          // РџРѕРёСЃРє РґРѕ РєРѕРЅС†Р° С„Р°Р№Р»Р°
         std::string identifier;
-        getline(memory,identifier);   // Получение следующей фразы
+        getline(memory,identifier);   // РџРѕР»СѓС‡РµРЅРёРµ СЃР»РµРґСѓСЋС‰РµР№ С„СЂР°Р·С‹
         
-        if (identifier == phrase) {   // Если это та фраза, которую мы ищем
+        if (identifier == phrase) {   // Р•СЃР»Рё СЌС‚Рѕ С‚Р° С„СЂР°Р·Р°, РєРѕС‚РѕСЂСѓСЋ РјС‹ РёС‰РµРј
             std::string response;
             getline(memory,response);                       
-            return answer(response);     // Получаем ответ      
+            return answer(response);     // РџРѕР»СѓС‡Р°РµРј РѕС‚РІРµС‚      
         }
     }
-    memory.close();                              // Фраза не найдена в памяти. Закрыть файл
+    memory.close();                              // Р¤СЂР°Р·Р° РЅРµ РЅР°Р№РґРµРЅР° РІ РїР°РјСЏС‚Рё. Р—Р°РєСЂС‹С‚СЊ С„Р°Р№Р»
     
     memory.open("memory.txt",
-                std::ios::out | std::ios::app);  // Открыть файл и добавить в конец файла
-    memory << phrase << std::endl;               // Записать полученную фразу в память
+                std::ios::out | std::ios::app);  // РћС‚РєСЂС‹С‚СЊ С„Р°Р№Р» Рё РґРѕР±Р°РІРёС‚СЊ РІ РєРѕРЅРµС† С„Р°Р№Р»Р°
+    memory << phrase << std::endl;               // Р—Р°РїРёСЃР°С‚СЊ РїРѕР»СѓС‡РµРЅРЅСѓСЋ С„СЂР°Р·Сѓ РІ РїР°РјСЏС‚СЊ
 
-    answer(phrase);                                 // Повторить фразу, введенную пользователем
+    answer(phrase);                                 // РџРѕРІС‚РѕСЂРёС‚СЊ С„СЂР°Р·Сѓ, РІРІРµРґРµРЅРЅСѓСЋ РїРѕР»СЊР·РѕРІР°С‚РµР»РµРј
     std::string userResponse;
-    getline(std::cin, userResponse);             // Получить подходящий ответ
-    memory << userResponse << std::endl;         // Записать подходящий ответ в память
-    memory.close();                              // Закрыть файл
+    getline(std::cin, userResponse);             // РџРѕР»СѓС‡РёС‚СЊ РїРѕРґС…РѕРґСЏС‰РёР№ РѕС‚РІРµС‚
+    memory << userResponse << std::endl;         // Р—Р°РїРёСЃР°С‚СЊ РїРѕРґС…РѕРґСЏС‰РёР№ РѕС‚РІРµС‚ РІ РїР°РјСЏС‚СЊ
+    memory.close();                              // Р—Р°РєСЂС‹С‚СЊ С„Р°Р№Р»
 }
 
-void Learner::answer(const std::string phrase) {    // Вывод ответа Learner
+void Learner::answer(const std::string phrase) {    // Р’С‹РІРѕРґ РѕС‚РІРµС‚Р° Learner
     std::cout << "- " << phrase << std::endl;
 }
